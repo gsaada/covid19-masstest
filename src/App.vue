@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'COVID19'
 }
 </script>
