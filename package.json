@@ -13,8 +13,13 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "apexcharts": "^3.15.5",
+    "echarts": "^4.6.0",
     "axios": "^0.18.1",
     "quasar": "^1.0.0",
+    "vue-apexcharts": "^1.5.2",
+    "vue-echarts-v3": "^2.0.1",
+    "vuedraggable": "^2.23.2",
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
