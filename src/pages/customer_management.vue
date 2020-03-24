@@ -60,7 +60,126 @@
       <q-card style="width: 600px; max-width: 60vw;">
         <q-card-section>
           <div class="text-h6">
-            Add new customer
+            Add new patient
+            <q-btn round flat dense icon="close" class="float-right" color="grey-8" v-close-popup></q-btn>
+          </div>
+        </q-card-section>
+        <q-separator inset></q-separator>
+        <q-card-section class="q-pt-none">
+          <q-form class="q-gutter-md" @submit="onSubmit">
+            <q-list>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Customer Name</q-item-label>
+                  <q-input dense outlined v-model="customer.name" label="Customer Name" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Patient Id</q-item-label>
+                  <q-input dense outlined v-model="customer.id" label="Customer Name" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Age</q-item-label>
+                  <q-input dense outlined v-model="customer.age" label="City" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Gender</q-item-label>
+                  <q-input dense outlined v-model="customer.age" label="City" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Corona Status</q-item-label>
+                  <q-input dense outlined v-model="customer.coronaStatus" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Hypertension</q-item-label>
+                  <q-input dense outlined v-model="customer.hypertension" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Diabetes</q-item-label>
+                  <q-input dense outlined v-model="customer.diabetes" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Smoker</q-item-label>
+                  <q-input dense outlined v-model="customer.smoker" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Cad</q-item-label>
+                  <q-input dense outlined v-model="customer.cad" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">CHF</q-item-label>
+                  <q-input dense outlined v-model="customer.CHF" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">COPD</q-item-label>
+                  <q-input dense outlined v-model="customer.COPD" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">CKD</q-item-label>
+                  <q-input dense outlined v-model="customer.CKD" label="State" />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-item-label class="q-pb-xs">Last Call</q-item-label>
+                  <q-input
+                    dense
+                    outlined
+                    v-model="customer.last_call"
+                    mask="date"
+                    label="Last Call"
+                  >
+                    <template v-slot:append>
+                      <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy
+                          ref="lastCallProxy"
+                          transition-show="scale"
+                          transition-hide="scale"
+                        >
+                          <q-date
+                            v-model="customer.last_call"
+                            @input="() => $refs.lastCallProxy.hide()"
+                          />
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                  </q-input>
+                </q-item-section>
+              </q-item>
+            </q-list>
+            <q-card-actions align="right" class="bg-white text-teal">
+              <q-btn label="Save" type="submit" color="primary" v-close-popup />
+            </q-card-actions>
+          </q-form>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <!-- <q-dialog v-model="edit_customer">
+      <q-card style="width: 600px; max-width: 60vw;">
+        <q-card-section>
+          <div class="text-h6">
+            Edit  customer
             <q-btn round flat dense icon="close" class="float-right" color="grey-8" v-close-popup></q-btn>
           </div>
         </q-card-section>
@@ -121,12 +240,13 @@
           <q-btn label="Save" type="submit" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
   </q-page>
 </template>
 
 <script>
 import { exportFile } from 'quasar'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 function wrapCsvValue (val, formatFn) {
   let formatted = formatFn !== undefined ? formatFn(val) : val
@@ -263,6 +383,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      // patient: 'general/setDrillSelectorView',
+    }),
+    onSubmit (evt) {
+      // console.log(evt.target)
+      console.log(this.customer)
+      console.log(this.patient)
+      const formData = new FormData(evt.target)
+      console.log(formData)
+    },
     exportTable () {
       // naive encoding to csv format
       const content = [this.columns.map(col => wrapCsvValue(col.label))]
@@ -292,6 +422,12 @@ export default {
         })
       }
     }
+  },
+  computed: {
+    ...mapState({}),
+    ...mapGetters({
+      patient: 'patient/patient'
+    })
   }
 }
 </script>
