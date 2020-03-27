@@ -384,9 +384,12 @@ export default {
   },
   methods: {
     ...mapActions({
+      sendPatientData: 'patient/sendPatientData',
+      sendPatientData2: 'patient/sendPatientData2'
       // patient: 'general/setDrillSelectorView',
     }),
     onSubmit (evt) {
+      this.sendPatientData2()
       // console.log(evt.target)
       console.log(this.customer)
       console.log(this.patient)
