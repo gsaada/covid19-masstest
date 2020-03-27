@@ -385,11 +385,12 @@ export default {
   methods: {
     ...mapActions({
       sendPatientData: 'patient/sendPatientData',
-      sendPatientData2: 'patient/sendPatientData2'
+      sendPatientData2: 'patient/sendPatientData2',
+      sendPatientData3: 'patient/sendPatientData3'
       // patient: 'general/setDrillSelectorView',
     }),
     onSubmit (evt) {
-      this.sendPatientData2()
+      this.sendPatientData3()
       // console.log(evt.target)
       console.log(this.customer)
       console.log(this.patient)
