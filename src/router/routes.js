@@ -1,9 +1,13 @@
+// import { componenets, AmplifyEventBus } from 'aws-amplify-vue';
+
 
 const routes = [
-  { path: '/', component: () => import('pages/login.vue') },
+  { path: '/auth', component: () => import('pages/login.vue') },
   {
     path: '/',
+    redirect: '/dashboard',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { requiresAuth: true},
     children: [
       { path: '/dashboard', component: () => import('pages/dashboard.vue') },
       { path: '/customer_management', component: () => import('pages/customer_management.vue') },

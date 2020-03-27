@@ -3,7 +3,8 @@
     <q-page-container>
       <q-page class="flex flex-center">
         <div id="particles-js"></div>
-        <LoginForm v-bind:username="username" v-bind:password="password" />
+        <!-- <LoginForm v-bind:username="username" v-bind:password="password" /> -->
+        <amplify-authenticator></amplify-authenticator>
       </q-page>
     </q-page-container>
   </q-layout>
