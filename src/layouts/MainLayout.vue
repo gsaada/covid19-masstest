@@ -10,7 +10,7 @@
         <q-toolbar-title>CRM Admin</q-toolbar-title>
 
         <q-btn flat round dense icon="search" class="q-mr-xs"/>
-        <q-btn flat round dense icon="fas fa-sign-out-alt" to="/"/>
+        <q-btn flat round dense icon="fas fa-sign-out-alt" @click="signOut" />
       </q-toolbar>
     </q-header>
     <q-drawer class="left-navigation text-white"
@@ -102,11 +102,27 @@
 </template>
 
 <script>
+
+import { AmplifyEventBus } from 'aws-amplify-vue';
+
 export default {
   data () {
     return {
       left: false
     }
+  },
+  methods: {
+    signOut: function(event) {
+        this.$Amplify.Auth.signOut()
+        .then(() => {
+          console.info('signout success')
+          return AmplifyEventBus.$emit('authState', 'signedOut')
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    },
+
   }
 }
 </script>
