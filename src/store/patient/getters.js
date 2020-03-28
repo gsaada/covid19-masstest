@@ -1,4 +1,7 @@
-export function patient (state) {
-  console.log(state)
+export function patientData (state) {
   return state.patient
+}
+
+export function patientResults (state) {
+  return state.results
 }

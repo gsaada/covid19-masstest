@@ -1,38 +1,37 @@
 import axios from 'axios'
-import request from 'request'
 
 const body = {
-  patient_id: '341351516',
-  doctor_number: '123456',
+  patient_id: '341351516', // X
+  doctor_number: '123456', // X
   patient_information: {
-    age: 20,
-    gender: '',
+    age: 20, // X
+    gender: '', // X
     ethnicity: ''
   },
   corona_status: {
-    corona_positive: 1
+    corona_positive: 1 // X bool
   },
   medical_preconditions: {
-    htn: 0,
-    dm: 1,
-    smoker: 0,
-    cad: 1,
-    chf: 0,
-    copd: 0,
-    ckd: 0,
-    hd: 1,
-    cld: 0,
-    dementia: 0,
-    cancer: 1,
-    aids: 0,
+    htn: 0, // x
+    dm: 1, // x
+    smoker: 0, // x
+    cad: 1, // x
+    chf: 0, // x
+    copd: 0, // x
+    ckd: 0, // x
+    hd: 1, // x
+    cld: 0, // x
+    dementia: 0, // x
+    cancer: 1, // x
+    aids: 0, // x
     ic: 0,
     tb: 0,
     dyspnea: 0
   },
-  clinical_status: {
-    temperature: 0,
-    pulse: 0,
-    respiratory_rate: 0,
+  clinical_status: { // optional
+    temperature: 0, // X
+    pulse: 0, // x
+    respiratory_rate: 0, // x
     auscultation: 0,
     mental_status: 0,
     oxygen_saturation: 0
@@ -43,7 +42,7 @@ const body = {
     growth_hormone_children: 0,
     immuno_depressant_drugs: 0
   },
-  other_considerations: {
+  other_considerations: { // X bool optional
     mobility_problem: 0,
     potential_for_home_quarentine: 1,
     pregnent_healthy: 0,
@@ -51,127 +50,34 @@ const body = {
   }
 }
 
-export function sendPatientData () {
-  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-  axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*'
+export function sendPatientData ({ commit }, patientData) {
   axios.defaults.headers.common['Content-Type'] = 'application/json'
-  // axios.defaults.headers.common['x-api-token'] = 'inawDBjEa12HYpdIvkUDpaxAcdKA3l4Da7aWcTr7'
+  axios.defaults.headers.common['x-api-key'] = 'inawDBjEa12HYpdIvkUDpaxAcdKA3l4Da7aWcTr7'
 
-  axios.post('https://cn8pc7plbl.execute-api.eu-west-1.amazonaws.com/staging/getPatientModelRecommendation', body).then((response) => {
-    console.log(response.data)
+  const PatienDataToRequest = preparePatientData(patientData)
+  axios.post('https://cn8pc7plbl.execute-api.eu-west-1.amazonaws.com/staging/getPatientModelRecommendation', PatienDataToRequest, { crossdomain: true }).then((response) => {
+    commit('setPatientResults', response.data.recommendation)
   })
     .catch((err) => {
       console.log(err)
-      // this.$q.notify({
-      //   color: 'negative',
-      //   position: 'top',
-      //   message: 'Loading failed',
-      //   icon: 'report_problem'
-      // })
     })
 }
-
-export function sendPatientData2 () {
-  return new Promise(function (resolve, reject) {
-    var options = {
-      method: 'POST',
-      url: 'https://cn8pc7plbl.execute-api.eu-west-1.amazonaws.com/staging/getPatientModelRecommendation',
-      headers:
-      {
-        'cache-control': 'no-cache',
-        Connection: 'keep-alive',
-        'Cache-Control': 'no-cache',
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: body,
-      json: true
-    }
-    request(options, function (error, response, body) {
-      if (error) { reject(error) }
-      resolve(body)
-    })
-  })
+function preparePatientData (patientData) {
+  const patientBody = Object.assign({}, body)
+  patientBody.patient_id = patientData.id
+  patientBody.patient_information = changeObjectBolleansToNumbers(patientData.patient_information)
+  patientBody.corona_status = Object.assign(patientData.corona_status, changeObjectBolleansToNumbers(patientData.corona_status))
+  patientBody.medical_preconditions = Object.assign(patientData.medical_preconditions, changeObjectBolleansToNumbers(patientData.medical_preconditions))
+  patientBody.clinical_status = Object.assign(patientBody.clinical_status, changeObjectBolleansToNumbers(patientData.clinical_status))
+  patientBody.other_considerations = Object.assign(patientData.other_considerations, changeObjectBolleansToNumbers(patientData.other_considerations))
+  console.log(patientBody.medical_preconditions)
+  return patientBody
 }
 
-export function sendPatientData3 () {
-  var data = JSON.stringify({
-    patient_id: '341351516',
-    doctor_number: '123456',
-    patient_information: {
-      age: 20,
-      gender: '',
-      ethnicity: ''
-    },
-    corona_status: {
-      corona_positive: 1
-    },
-    medical_preconditions: {
-      htn: 0,
-      dm: 1,
-      smoker: 0,
-      cad: 1,
-      chf: 0,
-      copd: 0,
-      ckd: 0,
-      hd: 1,
-      cld: 0,
-      dementia: 0,
-      cancer: 1,
-      aids: 0,
-      ic: 0,
-      tb: 0,
-      dyspnea: 0
-    },
-    clinical_status: {
-      temperature: 0,
-      pulse: 0,
-      respiratory_rate: 0,
-      auscultation: 0,
-      mental_status: 0,
-      oxygen_saturation: 0
-    },
-    treatment: {
-      psychiatric_treatment: 0,
-      anti_inflamatory_regular_treatment: 0,
-      growth_hormone_children: 0,
-      immuno_depressant_drugs: 0
-    },
-    other_considerations: {
-      mobility_problem: 0,
-      potential_for_home_quarentine: 1,
-      pregnent_healthy: 0,
-      youngs_with_asthma: 0
-    }
-  })
-
-  var xhr = new XMLHttpRequest()
-  xhr.withCredentials = true
-
-  xhr.addEventListener('readystatechange', function () {
-    if (this.readyState === 4) {
-      console.log(this.responseText)
-    }
-  })
-
-  xhr.open('POST', 'https://cn8pc7plbl.execute-api.eu-west-1.amazonaws.com/staging/getPatientModelRecommendation')
-  xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-  xhr.setRequestHeader('Access-Control-Allow-Headers', '*')
-  xhr.setRequestHeader('Content-Type', 'application/json')
-  xhr.setRequestHeader('Accept', '*/*')
-  xhr.setRequestHeader('Cache-Control', 'no-cache')
-  xhr.setRequestHeader('Postman-Token', 'a58bde6d-95cc-4752-ae14-eb202d3042d0,2ac48080-6cbc-40d2-bb90-e3ad5a9a50f2')
-  xhr.setRequestHeader('Host', 'cn8pc7plbl.execute-api.eu-west-1.amazonaws.com')
-  xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate')
-  xhr.setRequestHeader('Content-Length', '860')
-  xhr.setRequestHeader('Connection', 'keep-alive')
-  xhr.setRequestHeader('cache-control', 'no-cache')
-
-  xhr.send(data)
+function changeObjectBolleansToNumbers (object) {
+  const returnObject = {}
+  for (const [key, value] of Object.entries(object)) {
+    returnObject[key] = Number(value)
+  }
+  return returnObject
 }
-
-// https://cn8pc7plbl.execute-api.eu-west-1.amazonaws.com/staging
-// /getPatientModelRecommendation
-// POST
-// x-api-token : inawDBjEa12HYpdIvkUDpaxAcdKA3l4Da7aWcTr7

@@ -11,7 +11,7 @@
       :pagination.sync="pagination"
     >
       <template v-slot:top-right="props">
-        <q-btn @click="new_customer=true" outline color="primary" label="Add New" class="q-mr-xs" />
+        <q-btn @click="new_patient=true" outline color="primary" label="Add New" class="q-mr-xs" />
 
         <q-input outlined dense debounce="300" v-model="filter" placeholder="Search">
           <template v-slot:append>
@@ -68,7 +68,7 @@
         </q-td>
       </template>
     </q-table>
-    <q-dialog v-model="new_customer">
+    <q-dialog v-model="new_patient">
       <q-card style="width: 600px; max-width: 60vw;">
         <q-card-section>
           <div class="text-h6">
@@ -83,25 +83,25 @@
               <q-item>
                 <q-item-section>
                   <q-item-label class="q-pb-xs">Change Name</q-item-label>
-                  <q-input dense outlined v-model="customer.name" label="Change Name" />
+                  <q-input dense outlined v-model="patient.name" label="Change Name" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-item-label class="q-pb-xs">Change Type</q-item-label>
-                  <q-input dense outlined v-model="customer.change_type" label="Change Type" />
+                  <q-input dense outlined v-model="patient.change_type" label="Change Type" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-item-label class="q-pb-xs">New Address Information</q-item-label>
-                  <q-input dense outlined v-model="customer.new_address" label="New Address Information" />
+                  <q-input dense outlined v-model="patient.new_address" label="New Address Information" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-item-label class="q-pb-xs">Status</q-item-label>
-                  <q-input dense outlined v-model="customer.status" label="Status" />
+                  <q-input dense outlined v-model="patient.status" label="Status" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -134,8 +134,8 @@ export default {
   data () {
     return {
       filter: '',
-      customer: {},
-      new_customer: false,
+      patient: {},
+      new_patient: false,
       mode: 'list',
       columns: [
         {
@@ -148,7 +148,7 @@ export default {
         {
           name: 'desc',
           required: true,
-          label: 'Customer Name',
+          label: 'Patient Name',
           align: 'left',
           field: row => row.name,
           sortable: true
