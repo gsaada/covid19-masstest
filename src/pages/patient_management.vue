@@ -122,24 +122,18 @@
               <q-item>
                 <q-item-section>
                   <q-item-label class="q-pb-xs">Medical Preconditions</q-item-label>
-                  <div class="row checkbox_flex">
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.htn" label="htn"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.dm" label="dm"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.smoker" label="smoker"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.cad" label="cad"></q-checkbox>
-                  </div>
-                  <div class="row checkbox_flex">
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.chf" label="chf"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.copd" label="copd"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.ckd" label="ckd"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.hd" label="hd"></q-checkbox>
-                  </div>
-                  <div class="row checkbox_flex">
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.cld" label="cld"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.dementia" label="dementia"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.cancer" label="cancer"></q-checkbox>
-                    <q-checkbox style="width:65px;" v-model="patient.medical_preconditions.aids" label="aids"></q-checkbox>
-                  </div>
+                    <q-checkbox v-model="patient.medical_preconditions.htn" label="Hypertension"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.dm" label="Diabetes"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.smoker" label="Smoker"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.cad" label="Cardiovascular Disease"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.chf" label="Heart Failure"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.copd" label="COPD"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.cld" label="Cirrhosis Chronic Liver Disease"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.dementia" label="Dementia"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.cancer" label="Cancer"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.aids" label="Aids"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.ckd" label="Chronic Kidney Disease"></q-checkbox>
+                    <q-checkbox v-model="patient.medical_preconditions.hd" label="Kidney Failure / Dialysis"></q-checkbox>
                 </q-item-section>
               </q-item>
               <q-separator class="separator_padding" inset></q-separator>
