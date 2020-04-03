@@ -178,98 +178,98 @@ export default {
       data: [
         {
           change_id: 'C001',
-          name: 'Dr. Jada Conolly',
+          name: 'Jada Conolly',
           change_type: 'Name Change',
           status: 'Submitted',
           creation_date: '12-09-2019'
         },
         {
           change_id: 'C002',
-          name: 'Dr. Kiley Ibbotson',
+          name: 'Kiley Ibbotson',
           change_type: 'Address Change',
           status: 'Approved',
           creation_date: '09-02-2019'
         },
         {
           change_id: 'C003',
-          name: 'Dr. Leslie Tecklenburg',
+          name: 'Leslie Tecklenburg',
           change_type: 'New Profile',
           status: 'Approved',
           creation_date: '03-25-2019'
         },
         {
           change_id: 'C004',
-          name: 'Dr. Lia Whitledge',
+          name: 'Lia Whitledge',
           change_type: 'Name Change',
           status: 'Submitted',
           creation_date: '03-18-2019'
         },
         {
           change_id: 'C005',
-          name: 'Dr. Sam Wileman',
+          name: 'Sam Wileman',
           change_type: 'Name Change',
           status: 'Rejected',
           creation_date: '04-09-2019'
         },
         {
           change_id: 'C006',
-          name: 'Dr. Edgar Colmer',
+          name: 'Edgar Colmer',
           change_type: 'Address Change',
           status: 'Approved',
           creation_date: '09-03-2019'
         },
         {
           change_id: 'C007',
-          name: 'Dr. Kaiden Rozelle',
+          name: 'Kaiden Rozelle',
           change_type: 'Address Change',
           status: 'Submitted',
           creation_date: '01-12-2019'
         },
         {
           change_id: 'C008',
-          name: 'Dr. Leslie Stopher',
+          name: 'Leslie Stopher',
           change_type: 'New Profile',
           status: 'Approved',
           creation_date: '04-15-2019'
         },
         {
           change_id: 'C009',
-          name: 'Dr. Miguel Subasic',
+          name: 'Miguel Subasic',
           change_type: 'New Profile',
           status: 'Approved',
           creation_date: '11-09-2019'
         },
         {
           change_id: 'C010',
-          name: 'Dr. Reese Vandygriff',
+          name: 'Reese Vandygriff',
           change_type: 'New Profile',
           status: 'Rejected',
           creation_date: '01-01-2019'
         },
         {
           change_id: 'C011',
-          name: 'Dr. Griffin Troglen',
+          name: 'Griffin Troglen',
           change_type: 'New Profile',
           status: 'Approved',
           creation_date: '04-12-2019'
         },
         {
           change_id: 'C012',
-          name: 'Dr. Zachary Wehrley',
+          name: 'Zachary Wehrley',
           change_type: 'Address Change',
           status: 'Submitted',
           creation_date: '10-09-2019'
         },
         {
           change_id: 'C013',
-          name: 'Dr. Kyle Wahlert',
+          name: 'Kyle Wahlert',
           change_type: 'Address Change',
           status: 'Approved',
           creation_date: '01-02-2019'
         },
         {
           change_id: 'C014',
-          name: 'Dr. John Subasic',
+          name: 'John Subasic',
           change_type: 'Address Change',
           status: 'Approved',
           creation_date: '07-06-2019'

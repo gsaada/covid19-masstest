@@ -25,6 +25,7 @@
     "axios": "^0.18.1",
     "echarts": "^4.6.0",
     "graphql": "^14.6.0",
+    "http-server": "^0.12.1",
     "quasar": "^1.0.0",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.5.2",

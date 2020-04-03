@@ -72,11 +72,11 @@
                 <div class="row">
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Patient Name</q-item-label>
-                    <q-input dense outlined v-model="patient.name" label="Patient Name" />
+                    <q-input dense outlined v-model="patient.name" label="Patient Name" ref="patientName" :rules="[ val => val && val.length > 0 || 'Please type something']"/>
                   </q-item-section>
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Patient Id</q-item-label>
-                    <q-input dense outlined v-model="patient.id" label="patient ID" />
+                    <q-input dense outlined v-model="patient.id" label="patient ID" ref="patientId" :rules="[val => val !== null && val !== '' || 'Please type patient id', val => val > 0 && val < 999999999999 || 'Please type a patient id']"/>
                   </q-item-section>
                 </div>
               </q-item>
@@ -85,11 +85,16 @@
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Age</q-item-label>
                     <q-input
+                      ref="patientAge"
                       dense outlined
                       lazy-rules
                       type="number"
                       v-model="patient.patient_information.age"
                       label="Your age *"
+                      :rules="[
+                        val => val !== null && val !== '' || 'Please type your age',
+                        val => val > 0 && val < 100 || 'Please type a real age'
+                      ]"
                     ></q-input>
                   </q-item-section>
                   <q-item-section>
@@ -223,7 +228,7 @@
           </q-form>
         </q-card-section>
       </q-card>
-      <q-card v-else-if="patient_modal_results" style="width: 600px; max-width: 60vw; height:600px">
+      <q-card v-else-if="patient_modal_results" style="width: 600px; max-width: 60vw; height:800px">
         <div>
           <q-card-section>
             <transition
@@ -307,8 +312,17 @@
                     </q-tab-panels>
                   </template>
                 </q-splitter>
-                <q-card-actions align="right" class="bg-white text-teal">
-                  <q-btn label="Close" type="submit" color="primary" v-close-popup />
+                
+                  <q-item-label class="q-pb-xs">Doctor comments</q-item-label>
+                  <q-input
+                    v-model="doctor_comments"
+                    filled
+                    type="textarea"
+                  ></q-input>
+                <q-card-actions align="center" class="bg-white text-teal row">
+                    <q-btn color="primary" icon="home" label="Home" @click="resetData" v-close-popup></q-btn>
+                    <q-btn color="secondary" icon="hotel" label="Hotel" v-close-popup></q-btn>
+                    <q-btn color="red" icon="local_hospital" label="Hospitle" v-close-popup></q-btn>
                 </q-card-actions>
               </div>
             </transition>
@@ -335,6 +349,40 @@ function wrapCsvValue (val, formatFn) {
   formatted = formatted.split('"').join('""')
 
   return `"${formatted}"`
+}
+const defaultPatientData = {
+  patient_information: {
+    age: undefined,
+    gender: undefined
+  },
+  corona_status: {
+    corona_positive: false
+  },
+  medical_preconditions: {
+    htn: false,
+    dm: false,
+    smoker: false,
+    cad: false,
+    chf: false,
+    copd: false,
+    ckd: false,
+    hd: false,
+    cld: false,
+    dementia: false,
+    cancer: false,
+    aids: false
+  },
+  clinical_status: {
+    temperature: 0,
+    pulse: 0,
+    respiratory_rate: 0
+  },
+  other_considerations: {
+    mobility_problem: false,
+    potential_for_home_quarentine: false,
+    pregnent_healthy: false,
+    youngs_with_asthma: false
+  }
 }
 
 export default {
@@ -375,6 +423,7 @@ export default {
           youngs_with_asthma: false
         }
       },
+      doctor_comments: '',
       new_patient: false,
       patient_modal_questanire: false,
       patient_modal_results: false,
@@ -422,84 +471,84 @@ export default {
         }
       ],
       data: [
-        // {
-        //   name: 'Dr. Jada Conolly',
-        //   city: 'GILBERT',
-        //   state: 'AZ',
-        //   last_call: '12-09-2019'
-        // },
-        // {
-        //   name: 'Dr. Kiley Ibbotson',
-        //   city: 'LA MESA',
-        //   state: 'CA',
-        //   last_call: '09-02-2019'
-        // },
-        // {
-        //   name: 'Dr. Leslie Tecklenburg',
-        //   city: 'SAN DIEGO',
-        //   state: 'CA',
-        //   last_call: '03-25-2019'
-        // },
-        // {
-        //   name: 'Dr. Lia Whitledge',
-        //   city: 'PHOENIX',
-        //   state: 'AZ',
-        //   last_call: '03-18-2019'
-        // },
-        // {
-        //   name: 'Dr. Sam Wileman',
-        //   city: 'MESA',
-        //   state: 'AZ',
-        //   last_call: '04-09-2019'
-        // },
-        // {
-        //   name: 'Dr. Edgar Colmer',
-        //   city: 'PHOENIX',
-        //   state: 'AZ',
-        //   last_call: '09-03-2019'
-        // },
-        // {
-        //   name: 'Dr. Kaiden Rozelle',
-        //   city: 'LAKEWOOD',
-        //   state: 'CA',
-        //   last_call: '01-12-2019'
-        // },
-        // {
-        //   name: 'Dr. Leslie Stopher',
-        //   city: 'YUMA',
-        //   state: 'AZ',
-        //   last_call: '04-15-2019'
-        // },
-        // {
-        //   name: 'Dr. Miguel Subasic',
-        //   city: 'TEMPE',
-        //   state: 'AZ',
-        //   last_call: '11-09-2019'
-        // },
-        // {
-        //   name: 'Dr. Reese Vandygriff',
-        //   city: 'LAKEWOOD',
-        //   state: 'CA',
-        //   last_call: '01-01-2019'
-        // },
-        // {
-        //   name: 'Dr. Griffin Troglen',
-        //   city: 'YUMA',
-        //   state: 'AZ',
-        //   last_call: '04-12-2019'
-        // },
-        // {
-        //   name: 'Dr. Zachary Wehrley',
-        //   city: 'TEMPE',
-        //   state: 'AZ',
-        //   last_call: '10-09-2019'
-        // },
-        // {
-        //   name: 'Dr. Kyle Wahlert',
-        //   city: 'LAKEWOOD',
-        //   state: 'CA',
-        //   last_call: '01-02-2019'
-        // }
+        {
+          name: 'Jada Conolly',
+          city: 'GILBERT',
+          state: 'AZ',
+          last_call: '12-09-2019'
+        },
+        {
+          name: 'Kiley Ibbotson',
+          city: 'LA MESA',
+          state: 'CA',
+          last_call: '09-02-2019'
+        },
+        {
+          name: 'Leslie Tecklenburg',
+          city: 'SAN DIEGO',
+          state: 'CA',
+          last_call: '03-25-2019'
+        },
+        {
+          name: 'Lia Whitledge',
+          city: 'PHOENIX',
+          state: 'AZ',
+          last_call: '03-18-2019'
+        },
+        {
+          name: 'Sam Wileman',
+          city: 'MESA',
+          state: 'AZ',
+          last_call: '04-09-2019'
+        },
+        {
+          name: 'Edgar Colmer',
+          city: 'PHOENIX',
+          state: 'AZ',
+          last_call: '09-03-2019'
+        },
+        {
+          name: 'Kaiden Rozelle',
+          city: 'LAKEWOOD',
+          state: 'CA',
+          last_call: '01-12-2019'
+        },
+        {
+          name: 'Leslie Stopher',
+          city: 'YUMA',
+          state: 'AZ',
+          last_call: '04-15-2019'
+        },
+        {
+          name: 'Miguel Subasic',
+          city: 'TEMPE',
+          state: 'AZ',
+          last_call: '11-09-2019'
+        },
+        {
+          name: 'Reese Vandygriff',
+          city: 'LAKEWOOD',
+          state: 'CA',
+          last_call: '01-01-2019'
+        },
+        {
+          name: 'Griffin Troglen',
+          city: 'YUMA',
+          state: 'AZ',
+          last_call: '04-12-2019'
+        },
+        {
+          name: 'Zachary Wehrley',
+          city: 'TEMPE',
+          state: 'AZ',
+          last_call: '10-09-2019'
+        },
+        {
+          name: 'Kyle Wahlert',
+          city: 'LAKEWOOD',
+          state: 'CA',
+          last_call: '01-02-2019'
+        }
       ],
       pagination: {
         rowsPerPage: 10
@@ -510,15 +559,20 @@ export default {
     ...mapActions({
       sendPatientData: 'patient/sendPatientData'
     }),
+    resetData () {
+      this.patient = defaultPatientData;
+    },
     newPatientClicked () {
       this.new_patient = true
       this.patient_modal_questanire = true
     },
     onSubmit (evt) {
-      this.$refs.name.validate()
-      this.$refs.age.validate()
+      this.$refs.patientName.validate()
+      this.$refs.patientAge.validate()
+      this.$refs.patientId.validate()
 
-      if (this.$refs.name.hasError || this.$refs.age.hasError) {
+      if (false) {
+      // if (this.$refs.patientId.hasError || this.$refs.patientName.hasError || this.$refs.patientAge.hasError) {
         this.formHasError = true
       } else {
         this.patient_modal_questanire = false

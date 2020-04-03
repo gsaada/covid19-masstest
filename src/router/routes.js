@@ -7,7 +7,7 @@ const routes = [
     path: '/',
     redirect: '/dashboard',
     component: () => import('layouts/MainLayout.vue'),
-    meta: { requiresAuth: true},
+    meta: { requiresAuth: false},
     children: [
       { path: '/dashboard', component: () => import('pages/dashboard.vue') },
       { path: '/patient_management', component: () => import('pages/patient_management.vue') },

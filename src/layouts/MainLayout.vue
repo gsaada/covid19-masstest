@@ -50,7 +50,7 @@
               </q-item-section>
             </q-item>
 
-            <q-item active-class="tab-active" to="/change_request" class="q-ma-sm navigation-item" clickable v-ripple>
+            <!-- <q-item active-class="tab-active" to="/change_request" class="q-ma-sm navigation-item" clickable v-ripple>
               <q-item-section avatar>
                 <q-icon name="send"/>
               </q-item-section>
@@ -78,7 +78,7 @@
               <q-item-section>
                 Transactions
               </q-item-section>
-            </q-item>
+            </q-item> -->
 
             <q-item active-class="tab-active" to="/my_profile" class="q-ma-sm navigation-item" clickable v-ripple>
               <q-item-section avatar>
