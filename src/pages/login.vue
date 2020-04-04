@@ -14,10 +14,7 @@
   import LoginForm from '../components/LoginForm'
   export default {
       data() {
-          return {
-              username: 'admin',
-              password: 'Admin@CRM'
-          }
+          return { }
       },
       mounted() {
           particlesJS("particles-js", {
